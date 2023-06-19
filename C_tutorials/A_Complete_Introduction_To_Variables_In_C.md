@@ -18,14 +18,14 @@ drive or any memory device attached to the machine running your program.
 A declared variable may only be use in a function, within a single source file
 or, multiple source files of the entire program.
 
-To declare a variable in C, means to define a type with an identifier.
+To declare a variable in C, means to specify a type with an identifier.
 
 ```C
 /* structure of variable declaration in C */
 
 type identifier; /* single variable declaration */
 
-type identifier_1, identifier_2, identifier_3; /* multiple variable declaration with same type */
+type identifier_1, identifier_2, identifier_3; /* multiple variable declaration with the same type */
 ```
 
 ## What is an identifier?
@@ -54,6 +54,20 @@ specifies to the compiler
 If any of the above conditions cannot be satisfied for the specified type of a
 variable, the compiler generates an error message.
 
+## Fundamental types in C
+C supports three (3) fundamental types:
+
+- Integer types
+- Floating types
+- Character types
+
+To specify any of the fundamental types in a variable declaration, we use the dedicated
+keywords provided for each of them in the C standard:
+
+- `int` is the keyword used to specify an integer type variable
+- `float` is the keyword used to speicify a floating type variable
+- `char` is the keyword used to specify a character type variable
+
 ## How to declare a variable in C?
 To declare a variable, we first specify the type of the variable, then its
 identifier. For example, we might declare variables “height” and “profit” as
@@ -73,57 +87,62 @@ means of assignment:
 height = 8;
 profit = 21.50;
 ```
-## Basic types in C
-
-C supports three (3) basic types for declaring variables:
-- Integer types
-- Floating types
-- Character types
-
-To specify any of the basic types in a variable declaration, we use the dedicated
-keywords provided for each of them in the C standard:
-
-- `int` is the keyword used to specify an integer type variable
-- `float` is the keyword used to speicify a floating type variable
-- `char` is the keyword used to specify a character type variable
-
 ## What happens in your computer when you declare a variable in C?
-When you declare a variable in C, you are basically introducing the variable to
-the program. As a result of the declaration the compiler now knows that it
-needs to reserve storage space for the variable on the hard drive of the
-computer running the program.
+When you declare a variable in the C programming language, you essentially
+introduce the variable to the program. This declaration informs the compiler
+that it should allocate storage space for the variable on the computer's hard
+drive while running the program.
 
-As the compiler compiles your program, it writes machine code that instructs
-your computer to reserve a specific amount of memory on the hard drive for each
-variable declared inside your program and then labels the reserved memory
-locations with the respective identifiers of each variable. It is this reserved
-memory that then acts as a storage for the values that you assign to the
-variables.
+While compiling your program, the compiler generates machine code that directs
+your computer to allocate a designated portion of memory on the hard drive for
+every declared variable in your program. It subsequently assigns corresponding
+identifiers to the allocated memory locations. This allocated memory serves as
+storage for the values assigned to the variables.
 
-The specific amount of memory that is reserved for each type of variable is
-determined by CPU architecture of your computer. Different CPU architectures
-have different defined memory sizes for each C basic types.
+The CPU architecture of your computer determines the precise amount of memory
+allocated for each variable type. Various CPU architectures have distinct
+memory allocation specifications for the fundamental C types.
 
+Memory allocation is generally defined in **bytes** but computer's translate
+memory allocation in **bits**
+```
+1 byte = 8 bits
+```
 
-The storage size of the basic C types on most 64-bit Linux machines are as
-follows:
+On most 64-bit Linux machines, the memory allocation specifications for the
+fundamental C types are as follows:
 
-Type | Storage size
+Type | memory allocation
 --- | ---
 `char` | 1 byte
 `int` | 4 bytes
 `float` | 4 bytes
 
-To know the storage size defined for each of the above types on your computer,
-use the `sizeof` operator.
+
+To obtain the memory allocation specifications for each of the fundamental C
+types on your computer, you can use the standard library function `sizeof`.
+
+If you compile and run the program below on your Bash/terminal it will print
+out the memory allocation specification for each of the fundamental C types on
+your computer:
 
 ```C
 /* filename: sizes.c */
 
-#include
+#include <stdio.h>
+
+int main(void)
+{
+	printf("Size of type 'char' on my computer: %lu bytes\n", sizeof(char));
+	printf("Size of type 'int' on my computer: %lu bytes\n", sizeof(int));
+	printf("Size of type 'float' on my computer: %lu bytes\n", sizeof(float));
+
+	return (0);
+}
+
 ```
 
-**The how the type specified for a variable affects the range of values that
+**The type specified for a variable affects the range of values that
 the variable can store so let’s spend some time to talk about the basic types in C.**
 
 Let’s talk briefly about each of the types.
@@ -136,10 +155,10 @@ The integer types are divided into two categories:
 - **Signed** integer types
 - **Unsigned** integer types
 
-By default, variables declared with keyword `int` can store **signed** integer types.
+By default, variables declared with keyword `int` are **signed** integer types.
 This means these variables can store both negative and positive whole numbers.
 
-To declare a variable that can store only positive whole numbers we use the
+To declare a variable that should store only positive whole numbers we use the
 `unisigned int` keyword.
 
 C provides six keyword flavors for integer types to allow us construct an
@@ -152,10 +171,22 @@ each integer type flavor are:
 - `long int`
 - `unsigned long int`
 
-The integer type flavor you choose to define for a variable will determine the
-range of values you can store through the variable.
+The integer type flavor you specify for a variable declaration determines the
+range of values that can be stored through the variable.
 
 The range of values represented by each of the six integer types varies from
 one machine to another. However, the table below shows the range of values for
 each integer type flavors on most 64-bits Linux machines.
-|Type | st
+|Type | Memory allocation | Value range
+--- | --- | ---
+`short` | 2 bytes | -32,768 to 32,767
+`unsigned short` | 2 bytes | 0 to 65,535
+`int` | 4 bytes | -2,147,483,648 to 2,147,483,647
+`unsigned int` | 4 bytes | 0 to 4,294,967,295
+`long` | 8 bytes | -9,223,372,036,854,775,808 to 9,223,372,036,854,775,807
+`unsigned long` | 8 bytes | 0 to 18,446,744,073,709,551,615
+
+C allows us to abbreviate the keywords of integer types flavors by dropping the
+word `int`. For example, `unsigned short int` may be abbreviated to `unsigned
+short`, and `long int` may be abbreviated to just `long`. Omitting `int` this
+way is a widespread practice among C programmers.
