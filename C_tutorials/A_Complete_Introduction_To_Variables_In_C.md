@@ -9,8 +9,13 @@ you will learn how to declare the appropriate variables for a computation in a
 C program and also learn how use variables
 
 ## What is a variable in C?
-A variable in C is an identifier for a reserved storage location on the hard
+A variable in C is a symbolic name for a specific storage location on the hard
 drive or any memory device attached to the machine running your program.
+
+According to Wikipedia, a symbol is a mark, sign, or word that indicates,
+signifies, or is understood as representing an idea, object, or relationship.
+
+In other words, a variable indicates a storage location.
 
 > “In C, all variables must be declared before they are used, usually at the
 > beginning of the function before any executable statements.” – K & R
@@ -30,13 +35,38 @@ type identifier_1, identifier_2, identifier_3; /* multiple variable declaration 
 
 ## What is an identifier?
 Identifier is the fancy term used to mean ‘name’. In C, identifiers are used to
-refer to names of variables, functions, macros, and other entities.
+refer to names of variables, functions, macros, and other data structur entities.
+
+You're required to construct the identifier for your variables although there
+are some rules for the construction of a valid identifier.
 
 The rules for the construction of identifiers are simple:
-- An identifier must start with an alphabet.
+- it must start with an alphabet.
+- it must not have any spaces inbetween
 - It must be unique and must not be a keyword in C
 - It can be made up of uppercase or lowercase alphabetic characters, the 10
 digits and the underscore `_`.
+
+```C
+/* list of valid indentifiers */
+sum
+Flag
+i
+mem_alloc
+x5j6
+
+/* list of invalid identifiers */
+
+sum$value /* $ is not a valid character */
+piece flag /* Embedded spaces are not permitted */
+3spencer /* Variable names cannot start with a number */
+int /* int is a  keyword in C */
+```
+**You should always remember that uppercase and lowercase letters are distinct
+in C. Therefore, the identifier `sum`, `Sum`, and `SUM` are different.**
+
+Programming best practices recommends that you construct identifiers that
+reflect the intended use of the variable.
 
 ## What is a type?
 A type is the classification that specify the kind of values a variable can
@@ -127,7 +157,7 @@ out the memory allocation specification for each of the fundamental C types on
 your computer:
 
 ```C
-/* filename: sizes.c */
+/* filename: type_sizes.c */
 
 #include <stdio.h>
 
@@ -142,8 +172,11 @@ int main(void)
 
 ```
 
-**The type specified for a variable affects the range of values that
-the variable can store so let’s spend some time to talk about the basic types in C.**
+**The type specified for a variable affects the range of values that the
+variable can store.**
+
+C takes portability seriously and actually bothers to tell you what values and
+ranges are guaranteed to be safe for each **type**.
 
 Let’s talk briefly about each of the types.
 
@@ -151,32 +184,75 @@ Let’s talk briefly about each of the types.
 An integer type variable will store whole numbers. The keyword used to specify
 an integer type is `int`.
 
-The integer types are divided into two categories:
+A whole number is
+
+An integer type variable can be declared as one of two forms:
 - **Signed** integer types
 - **Unsigned** integer types
 
-By default, variables declared with keyword `int` are **signed** integer types.
-This means these variables can store both negative and positive whole numbers.
+Variables declared with keyword `int` are **signed** integer types; this means
+they can store both negative and positive whole numbers.
 
-To declare a variable that should store only positive whole numbers we use the
-`unisigned int` keyword.
+Variables declared with the `unsigned int` keyword can only stored positive
+whole numbers.
 
-C provides six keyword flavors for integer types to allow us construct an
-integer type variable that meets our needs. The reserved keyword to specify
-each integer type flavor are:
-- `short int`
+
+To print the value stored in a variable with the `printf` function we use a
+format specifier.
+
+The format specifier for printing the value stored in **signed** integer type
+variable is `%d` while the format specifier for printing value stored in an
+**unsigned** integer type variable is `%u`
+```C
+/* code example of printing signed integers */
+#include <stdio.h>
+
+int main(void)
+{
+	/* variable declarations */
+	int score_point;
+	int height;
+	unsigned int age;
+
+	/* variable assignment or initialization */
+	score_point = -10;
+	height = 8;
+	age = 40;
+
+	/* printing values assigned to the variable */
+	printf("This is the final score point: %d\n", score_point);
+	printf("This is the height of the player: %d\n", height);
+	printf("The player is %u years old", age);
+
+	return (0);
+}
+
+```
+
+For both `signed` and `unsigned` integer types, C provides 3 flavors to allow
+us construct an integer type variable that meets our needs. The reserved keyword to specify
+each subtypes are:
+
 - `unsigned short int`
-- `int`
 - `unsigned int`
-- `long int`
 - `unsigned long int`
+- `signed short int`
+- `signed int`
+- `signed long int`
 
-The integer type flavor you specify for a variable declaration determines the
+
+`%lu` is the format specifier used to print the values of `unsigned long int`
+variables while `%ld` is used to print the values of `signed long int`
+variables. For the `unsigned short int` and `signed short int` variables use the
+format specifier `%u` and `%d` respectively.
+
+The integer type flavor you specify in a variable's declaration determines the
 range of values that can be stored through the variable.
 
-The range of values represented by each of the six integer types varies from
+The range of values represented by each of the integer types flavors varies from
 one machine to another. However, the table below shows the range of values for
 each integer type flavors on most 64-bits Linux machines.
+
 |Type | Memory allocation | Value range
 --- | --- | ---
 `short` | 2 bytes | -32,768 to 32,767
@@ -190,3 +266,40 @@ C allows us to abbreviate the keywords of integer types flavors by dropping the
 word `int`. For example, `unsigned short int` may be abbreviated to `unsigned
 short`, and `long int` may be abbreviated to just `long`. Omitting `int` this
 way is a widespread practice among C programmers.
+
+
+
+## Character types
+A character type variable will store characters. The keyword used to specify a
+character type is `char`.
+
+`char` is just another sort of integer type, but has a different application;
+It is used to store character constants. A character constant is formed
+by placing a single character in single quotes:
+```C
+'x'
+
+```
+Character constants are integers which are represented in a character set. The
+values of type `char` can vary from one computer to another, because different
+machines may have different underlying character sets. **ASCII** character set
+is the most popular. It is the available character set on most linux machines.
+
+
+It is important to note that character constant are enclosed in single quotes,
+not double quotes.
+
+
+But since it is still an integer type,
+it can be used for arithmetic too.
+
+The character constant
+
+The main difference between a `char` type variable and an `int` type variable is the
+amount of storage space their values use. A `char` type variable uses less
+storage size than any `int` type variable.
+
+C doesn't have special types for character manipulation but because so many C
+programs do a lot of character handling,
+
+Unlike other programming, C doesn't actually have a specification from strings
