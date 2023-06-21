@@ -48,14 +48,14 @@ The rules for the construction of identifiers are simple:
 digits and the underscore `_`.
 
 ```C
-/* list of valid indentifiers */
+/* example of valid indentifiers */
 sum
 Flag
 i
 mem_alloc
 x5j6
 
-/* list of invalid identifiers */
+/* example of invalid identifiers */
 
 sum$value /* $ is not a valid character */
 piece flag /* Embedded spaces are not permitted */
@@ -176,9 +176,8 @@ int main(void)
 variable can store.**
 
 C takes portability seriously and actually bothers to tell you what values and
-ranges are guaranteed to be safe for each **type**.
-
-Let’s talk briefly about each of the types.
+ranges are guaranteed to be safe for each **type**. So, let’s talk briefly
+about each of the types.
 
 ## Integer Type
 An integer type variable will store whole numbers. The keyword used to specify
@@ -190,19 +189,19 @@ An integer type variable can be declared as one of two forms:
 - **Signed** integer types
 - **Unsigned** integer types
 
-Variables declared with keyword `int` are **signed** integer types; this means
+Variables declared with keyword `int` are **signed** integer types. This means
 they can store both negative and positive whole numbers.
 
-Variables declared with the `unsigned int` keyword can only stored positive
-whole numbers.
+Variables declared with keyword `unsigned int` are **unsigned** integer types.
+this means they can only store positive whole numbers.
 
 
 To print the value stored in a variable with the `printf` function we use a
 format specifier.
 
-The format specifier for printing the value stored in **signed** integer type
-variable is `%d` while the format specifier for printing value stored in an
-**unsigned** integer type variable is `%u`
+The format specifier for printing the value stored in a **signed** integer type
+variable is `%d` while `%u` is the format specifier for printing value stored in an
+**unsigned** integer type variable.
 ```C
 /* code example of printing signed integers */
 #include <stdio.h>
