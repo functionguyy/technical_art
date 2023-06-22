@@ -29,18 +29,17 @@ type identifier; /* single variable declaration */
 type identifier_1, identifier_2, identifier_3; /* multiple variable declaration with the same type */
 ```
 ## What is an identifier?
-Identifier is the fancy term used to mean ‘name’. In C, identifiers are used to
-refer to names of variables, functions, macros, and other data structur entities.
-
-You're required to construct a valid identifier for your variables.
+An identifier is any name you provide for variables, functions, macros, and
+other data structures in your program. You're required to construct a valid
+identifier.
 
 The following list indicates the rules you must follow to construct a valid
 identifier:
 
-- it must start with an alphabet.
-- it must not have any spaces inbetween
-- It must be unique and must not be a keyword in C
-- It can be made up of uppercase or lowercase alphabetic characters, the 10
+- it must start with an alphabet(the underscore `_` counts as an alphabet).
+- it must not have any spaces inbetween.
+- It must be unique and must not be a keyword in C.
+- It can be made up of uppercase or lowercase alphabetic characters, the 10.
 digits and the underscore `_`.
 
 ```C
@@ -59,26 +58,27 @@ piece flag /* Embedded spaces are not permitted */
 int /* int is a  keyword in C */
 ```
 **You should always remember that uppercase and lowercase letters are distinct
-in C. Therefore, the identifier `sum`, `Sum`, and `SUM` are different.**
+in C. Therefore, the identifiers `sum`, `Sum`, and `SUM` are different.**
 
 Programming best practices recommends that you construct identifiers that
-reflect the intended use of the variable.
+reflects their intended use.
 
 ## What is a type?
-A type is the classification that specify the kind of values a variable can
-store.
+A type is the classification that specify the kind of values an identifier can
+store or manipulate.
 
-C is a statically typed language. This means that before a variable can be used
-it must first be declared with a specific type. The type of a variable
-specifies to the compiler
+C is a statically typed language. This means all identifiers must be associated
+with a type.
+
+The type specified for an identifier indicates the following to the compiler:
 
 - The kind of values that are acceptable to be stored through the variable
 - The acceptable range of values that can be stored through the variable
 - The amount of storage space that should be reserved for the variable
 - The computations that should be allowed to be performed with the variable
 
-If any of the above conditions cannot be satisfied for the specified type of a
-variable, the compiler generates an error message.
+If any of the above conditions cannot be satisfied for the specified type of an
+identifier, the compiler generates an error message.
 
 ## Fundamental types in C
 C supports three (3) fundamental types:
@@ -102,9 +102,9 @@ follows:
 int height;
 float profit;
 ```
-The first declaration states that height is a variable of type int, meaning
-that height can store whole numbers. The second declaration says that profit is
-a variable of type float, meaning that profit can store numbers with digits
+The first declaration states that `height` is a variable of type `int`, meaning
+that height can store whole numbers. The second declaration says that `profit` is
+a variable of type `float`, meaning that profit can store numbers with digits
 after the decimal points.
 
 After a variable has been declared it can be initialized (given a value) by
@@ -242,11 +242,12 @@ variables. For the `unsigned short int` and `signed short int` variables use the
 format specifier `%u` and `%d` respectively.
 
 The integer type flavor you specify in a variable's declaration determines the
-range of values that can be stored through the variable.
+range of values that can be stored through the variable. This range of values
+represented by each of the integer type flavors varies from
+one machine to another.
 
-The range of values represented by each of the integer types flavors varies from
-one machine to another. However, the table below shows the range of values for
-each integer type flavors on most 64-bits Linux machines.
+The following table shows the range of values for each flavor of an integer
+type variable on most 64-bits Linux machines:
 
 |Type | Memory allocation | Value range
 --- | --- | ---
@@ -269,32 +270,28 @@ A character type variable will store characters. The keyword used to specify a
 character type is `char`.
 
 `char` is just another sort of integer type, but has a different application;
-It is used to store character constants. A character constant is formed
-by placing a single character in single quotes:
+It is used to store character constants. Character constants are whole numbers
+which are represented in a character set. A character in a single quote `''`
+forms a character constant.
+
 ```C
-'x'
+'b'
 
 ```
-Character constants are integers which are represented in a character set. The
-values of type `char` can vary from one computer to another, because different
-machines may have different underlying character sets. **ASCII** character set
-is the most popular. It is the available character set on most linux machines.
+The values a `char` type can store varies from one computer to another, because different
+machines may have different underlying character sets.
+
+C supports the **ASCII** character set. This character set is available on most
+linux machines.
+
+It is important to note that character constants are enclosed in single quotes,
+not double quotes: `'b'` is not the same as `"b"`.
 
 
-It is important to note that character constant are enclosed in single quotes,
-not double quotes.
+The difference between a `char` type variable and any `int` type variable
+is their respective storage allocation and range of values. A `char` type
+variable uses a lesser storage allocation and accepts a smaller range of values.
 
+The following table shows the storage allocation specification and range of
+values for a `char` type variable:
 
-But since it is still an integer type,
-it can be used for arithmetic too.
-
-The character constant
-
-The main difference between a `char` type variable and an `int` type variable is the
-amount of storage space their values use. A `char` type variable uses less
-storage size than any `int` type variable.
-
-C doesn't have special types for character manipulation but because so many C
-programs do a lot of character handling,
-
-Unlike other programming, C doesn't actually have a specification from strings
