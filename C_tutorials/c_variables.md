@@ -9,13 +9,9 @@ you will learn how to declare the appropriate variables for a computation in a
 C program and also learn how use variables
 
 ## What is a variable in C?
-A variable in C is a symbolic name for a specific storage location on the hard
-drive or any memory device attached to the machine running your program.
-
-According to Wikipedia, a symbol is a mark, sign, or word that indicates,
-signifies, or is understood as representing an idea, object, or relationship.
-
-In other words, a variable indicates a storage location.
+In C, a variable is a symbolic name that represents a particular
+storage location on the hard drive or any memory device connected to the
+machine executing your program.
 
 > “In C, all variables must be declared before they are used, usually at the
 > beginning of the function before any executable statements.” – K & R
@@ -23,7 +19,7 @@ In other words, a variable indicates a storage location.
 A declared variable may only be use in a function, within a single source file
 or, multiple source files of the entire program.
 
-To declare a variable in C, means to specify a type with an identifier.
+In C, you specify a type with an identifier to declare a variable.
 
 ```C
 /* structure of variable declaration in C */
@@ -32,15 +28,15 @@ type identifier; /* single variable declaration */
 
 type identifier_1, identifier_2, identifier_3; /* multiple variable declaration with the same type */
 ```
-
 ## What is an identifier?
 Identifier is the fancy term used to mean ‘name’. In C, identifiers are used to
 refer to names of variables, functions, macros, and other data structur entities.
 
-You're required to construct the identifier for your variables although there
-are some rules for the construction of a valid identifier.
+You're required to construct a valid identifier for your variables.
 
-The rules for the construction of identifiers are simple:
+The following list indicates the rules you must follow to construct a valid
+identifier:
+
 - it must start with an alphabet.
 - it must not have any spaces inbetween
 - It must be unique and must not be a keyword in C
