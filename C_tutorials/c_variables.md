@@ -267,28 +267,30 @@ way is a widespread practice among C programmers.
 ### Signed vs Unsigned (optional read)
 
 In C programming, unsigned integers are  preferred over signed integers because
-(unsigned integers are more efficient)[add reference to Nigel jone article].
-Also unsigned integers produce defined results for (modulo arithmetic overflow)[]
+(unsigned integers are more efficient)[https://embeddedgurus.com/stack-overflow/2009/05/signed-versus-unsigned-integers/].
+Also unsigned integers produce defined results for
+(modulo arithmetic overflow)[https://embeddedgurus.com/stack-overflow/2009/08/a-tutorial-on-signed-and-unsigned-integers/#:~:text=To%20convert%20a%20signed%20integer%20to%20an%20unsigned,c%3B%20b%20%3D%20%28unsigned%20int%29a%3B%20c%20%3D%20%28int%29b%3B]
 
 
 ## Character types
+
 A character type variable will store character constants and manipulate string
 literals. `char` is the keyword used to specify the character type.
 
-I will only focus on how `char` type variables store character constants because the
-discussion of how they manipulate string literals is beyond the scope of this
-article.
+In this section, I will focus only on how `char` type variables store character
+constants because the discussion of how `char` type variables manipulate string
+literals is beyond the scope of this article.
 
-In C, a character in a single quote `''` forms a character constant.
+Character constants are characters that are represented in a character set. In
+C, a character in a single quote `''` forms a character constant.
+
 ```
 'v'
 ```
-Character constants are characters, which are represented with whole numbers in
-a character set.
 
 A character set is a system used to reperesent characters
-using codes that are understood by computers. **American Standard Code for
-Information Interchange(ASCII)** is a popular character set supported in C.
+with codes that are understood by computers. A popular type of character set is
+the **American Standard Code for Information Interchange(ASCII)** character set.
 
 The following are represented with whole numbers in **ASCII**:
 - Uppercase and lowercase letters of the alphabet.
@@ -308,6 +310,14 @@ aCharConst = '0'; /* digit 0 */
 aCharConst = ' '; /* space */
 aCharConst = 'B'; /* upper-case B 8/
 ```
+
+The character constants a `char` type variable can store varies from one
+computer to another, because different machines may have different underlying
+character sets. The **ASCII** character set is available on most Linux machines.
+
+**It is important to note that character constants are enclosed in single quotes,
+not double quotes: `'b'` is not the same as `"b"`.**
+
 `%c` is the format specifier used to print character constants.
 ```C
 #include <stdio.h>
@@ -326,19 +336,12 @@ int main(void)
 ```
 [image of output]
 
-The character constants a `char` type can store varies from one computer to
-another, because different machines may have different underlying character sets.
-But the **ASCII** character set is available on most Linux machines.
 
-**It is important to note that character constants are enclosed in single quotes,
-not double quotes: `'b'` is not the same as `"b"`.**
+C treats character constants as small integers, which means character constants
+can be used in arithmetic computation. When a character constant appears in an
+arithmetic computation, C simply uses the integer value that represents the
+character constant in the underlying character set on the machine executing the program.
 
-Working with character constants in C programming is simple because it treats
-character constants as small integers.
-
-When a character constant appears in a computation, C simply uses the integer
-value that represents the character constant in the underlying character set on
-the machine executing the program.
 ```C
 #include <stdio.h>
 
@@ -379,9 +382,8 @@ The C standard doesn't define whether just specifing `char`  in a variable
 declaration indicates a signed type or an unsigned type. some compilers treat
 ordinary `char` as a signed type, while others treat it as an unsigned type.
 (Some even allow the programmer to select, via a compiler option whether `char`
-should be signed or unsigned).
-
-Most of the time it doesn't really matter whether `char` is signed or unsigned.
+should be signed or unsigned). Most of the time it doesn't really matter
+whether `char` is signed or unsigned.
 
 > Don't assume that `char` is either signed or unsigned by default. if it
 > matters, use `signed char` or `unsigned char` instead of `char`.
