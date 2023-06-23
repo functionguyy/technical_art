@@ -15,7 +15,8 @@ machine executing your program.
 > “In C, all variables must be declared before they are used, usually at the
 > beginning of the function before any executable statements.” – K & R
 
-To declare a variable in C programming, specify a type with an identifier.
+To declare a variable in C programming, we first specify the type of the
+variable, then its identifier.
 
 ```C
 /* structure of variable declaration in C */
@@ -43,8 +44,10 @@ digits and the underscore `_`.
 sum
 Flag
 i
+Sum
 mem_alloc
 x5j6
+SUM
 
 /* example of invalid identifiers */
 
@@ -53,8 +56,8 @@ piece flag /* Embedded spaces are not permitted */
 3spencer /* Variable names cannot start with a number */
 int /* int is a  keyword in C */
 ```
-**You should always remember that uppercase and lowercase letters are distinct
-in C. Therefore, the identifiers `sum`, `Sum`, and `SUM` are different.**
+**Uppercase and lowercase letters are distinct in C. Therefore, the identifiers
+`sum`, `Sum`, and `SUM` are different.**
 
 Programming best practices recommends that you construct identifiers that
 reflects their intended use.
@@ -91,17 +94,18 @@ keywords provided for each of them in the C standard:
 - `char` is the keyword used to specify a character type variable
 
 ## How to declare a variable in C?
-To declare a variable, we first specify the type of the variable, then its
-identifier. For example, we might declare variables “height” and “profit” as
-follows:
+To declare a variable in C programming, we first specify the type of the
+variable, then its identifier. For example we might declare variables
+"height" and "profit" as:
+
 ```C
 int height;
 float profit;
 ```
-The first declaration states that `height` is a variable of type `int`, meaning
-that height can store whole numbers. The second declaration says that `profit` is
-a variable of type `float`, meaning that profit can store numbers with digits
-after the decimal points.
+The first declaration states that `height` is a variable of type `int`, which
+means that `height` can store whole numbers. The second declaration states that
+`profit` is a variable of type `float`, which means that `profit` can store
+numbers with digits after the decimal points.
 
 After a variable has been declared it can be initialized (given a value) by
 means of assignment:
@@ -144,8 +148,8 @@ Type | memory allocation
 To obtain the memory allocation specifications for each of the fundamental C
 types on your computer, you can use the standard library function `sizeof`.
 
-If you compile and run the program below on your Bash/terminal it will print
-out the memory allocation specification for each of the fundamental C types on
+Compile the program below on your Bash/terminal and run its output file to
+print out the memory allocation specification for each of the fundamental C types on
 your computer:
 
 ```C
@@ -164,18 +168,18 @@ int main(void)
 
 ```
 
-**The type specified for a variable affects the range of values that the
+**The type specified for a variable determines the range of values that the
 variable can store.**
 
-C takes portability seriously and actually bothers to tell you what values and
-ranges are guaranteed to be safe for each **type**. So, let’s talk briefly
-about each of the types.
+C takes portability(ability of your program to compile on different kinds of
+machines) seriously and actually bothers to tell you what values and ranges are
+guaranteed to be safe for each **type**. Continue reading to learn more about
+the different types and their range of values.
 
 ## Integer Type
-An integer type variable will store whole numbers. The keyword used to specify
-an integer type is `int`.
+An integer type variable will store whole numbers. `int` is the keyword used to
+specify the integer type.
 
-A whole number is
 
 An integer type variable can be declared as one of two forms:
 - **Signed** integer types
@@ -194,6 +198,7 @@ format specifier.
 The format specifier for printing the value stored in a **signed** integer type
 variable is `%d` while `%u` is the format specifier for printing value stored in an
 **unsigned** integer type variable.
+
 ```C
 /* code example of printing signed integers */
 #include <stdio.h>
@@ -259,37 +264,130 @@ word `int`. For example, `unsigned short int` may be abbreviated to `unsigned
 short`, and `long int` may be abbreviated to just `long`. Omitting `int` this
 way is a widespread practice among C programmers.
 
+### Signed vs Unsigned (optional read)
+
+In C programming, unsigned integers are  preferred over signed integers because
+(unsigned integers are more efficient)[add reference to Nigel jone article].
+Also unsigned integers produce defined results for (modulo arithmetic overflow)[]
 
 
 ## Character types
-A character type variable will store characters. The keyword used to specify a
-character type is `char`.
+A character type variable will store character constants and manipulate string
+literals. `char` is the keyword used to specify the character type.
 
-`char` is just another sort of integer type, but has a different application;
-It is used to store character constants. Character constants are whole numbers
-which are represented in a character set. A character in a single quote `''`
-forms a character constant.
+I will only focus on how `char` type variables store character constants because the
+discussion of how they manipulate string literals is beyond the scope of this
+article.
+
+In C, a character in a single quote `''` forms a character constant.
+```
+'v'
+```
+Character constants are characters, which are represented with whole numbers in
+a character set.
+
+A character set is a system used to reperesent characters
+using codes that are understood by computers. **American Standard Code for
+Information Interchange(ASCII)** is a popular character set supported in C.
+
+The following are represented with whole numbers in **ASCII**:
+- Uppercase and lowercase letters of the alphabet.
+- digits 0 to 9.
+- Special characters in C.
+
+**ASCII** is capable of representing 128 different characters.
 
 ```C
-'b'
+char aCharConst;
+
+/* sample of character constants that can be stored in a char type variable */
+
+aCharConst = 'b'; /* lower-case b */
+aCharConst = '\n'; /* new line special character */
+aCharConst = '0'; /* digit 0 */
+aCharConst = ' '; /* space */
+aCharConst = 'B'; /* upper-case B 8/
+```
+`%c` is the format specifier used to print character constants.
+```C
+#include <stdio.h>
+
+int main(void)
+{
+	char ch;
+
+	ch = 'W';
+
+	printf("The character constant stored in variable ch is %c\n", ch);
+
+	return (0);
+}
 
 ```
-The values a `char` type can store varies from one computer to another, because different
-machines may have different underlying character sets.
+[image of output]
 
-C supports the **ASCII** character set. This character set is available on most
-linux machines.
+The character constants a `char` type can store varies from one computer to
+another, because different machines may have different underlying character sets.
+But the **ASCII** character set is available on most Linux machines.
 
-It is important to note that character constants are enclosed in single quotes,
-not double quotes: `'b'` is not the same as `"b"`.
+**It is important to note that character constants are enclosed in single quotes,
+not double quotes: `'b'` is not the same as `"b"`.**
 
+Working with character constants in C programming is simple because it treats
+character constants as small integers.
+
+When a character constant appears in a computation, C simply uses the integer
+value that represents the character constant in the underlying character set on
+the machine executing the program.
+```C
+#include <stdio.h>
+
+int main(void)
+{
+	char ch;
+	int i;
+
+	i = 65;
+	ch = i + 'a';
+
+	printf("The value stored in variable "i" is: %d\n", i);
+	printf("The character constant stored in variable "ch" is: %c\n", ch);
+
+	return (0);
+}
+
+```
+[image of output]
 
 The difference between a `char` type variable and any `int` type variable
-is their respective storage allocation and range of values. A `char` type
-variable uses a lesser storage allocation and accepts a smaller range of values.
+is their respective storage allocation and range of values. `char` type
+variables use a lesser storage allocation and accepts a smaller range of values.
+
+Also since C allows character constants to be used as integers in
+computation, a `char` type variable can exits in both `signed` and `unsigned`
+flavors.
 
 The following table shows the storage allocation specification and range of
-values for a `char` type variable:
+values for the different flavours of `char` type variables:
+
+Type | Memory allocation spec | Value range
+--- | --- | ---
+`signed char` | 1 byte | -128 to 127
+`unsigned char` | 1 byte | 0 to 255
+
+The C standard doesn't define whether just specifing `char`  in a variable
+declaration indicates a signed type or an unsigned type. some compilers treat
+ordinary `char` as a signed type, while others treat it as an unsigned type.
+(Some even allow the programmer to select, via a compiler option whether `char`
+should be signed or unsigned).
+
+Most of the time it doesn't really matter whether `char` is signed or unsigned.
+
+> Don't assume that `char` is either signed or unsigned by default. if it
+> matters, use `signed char` or `unsigned char` instead of `char`.
+
+## Floating types
+
 
 ## Scope of variables
 A declared variable may only be use in a function, within a single source file
