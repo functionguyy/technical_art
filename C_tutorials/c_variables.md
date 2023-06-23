@@ -3,7 +3,6 @@ A C program, whatever its size, consists of functions and variables. A function
 contains statements that specify the computing operations to be done, and
 variables store values used during the computation.
 
-
 In this article, you will learn about the different types of variables in C,
 you will learn how to declare the appropriate variables for a computation in a
 C program and also learn how use variables
@@ -16,10 +15,7 @@ machine executing your program.
 > “In C, all variables must be declared before they are used, usually at the
 > beginning of the function before any executable statements.” – K & R
 
-A declared variable may only be use in a function, within a single source file
-or, multiple source files of the entire program.
-
-In C, you specify a type with an identifier to declare a variable.
+You specify a type with an identifier to declare a variable.
 
 ```C
 /* structure of variable declaration in C */
@@ -72,10 +68,10 @@ with a type.
 
 The type specified for an identifier indicates the following to the compiler:
 
-- The kind of values that are acceptable to be stored through the variable
-- The acceptable range of values that can be stored through the variable
-- The amount of storage space that should be reserved for the variable
-- The computations that should be allowed to be performed with the variable
+- The kind of values that are acceptable to be stored through the identifier
+- The acceptable range of values that can be stored through the identifier
+- The amount of storage space that should be reserved for the identifier
+- The computations that should be allowed to be performed with the identifier
 
 If any of the above conditions cannot be satisfied for the specified type of an
 identifier, the compiler generates an error message.
@@ -295,3 +291,6 @@ variable uses a lesser storage allocation and accepts a smaller range of values.
 The following table shows the storage allocation specification and range of
 values for a `char` type variable:
 
+## Scope of variables
+A declared variable may only be use in a function, within a single source file
+or, multiple source files of the entire program.
