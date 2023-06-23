@@ -30,7 +30,7 @@ other data structures in your program. You're required to construct a valid
 identifier.
 
 The following list indicates the rules you must follow to construct a valid
-identifier:
+identifier in C:
 
 - it must start with an alphabet(the underscore `_` counts as an alphabet).
 - it must not have any spaces inbetween.
