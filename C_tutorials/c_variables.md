@@ -3,9 +3,13 @@ A C program, whatever its size, consists of functions and variables. A function
 contains statements that specify the computing operations to be done, and
 variables store values used during the computation.
 
-In this article, you will learn about the different types of variables in C,
-you will learn how to declare the appropriate variables for a computation in a
-C program and also learn how use variables
+In this article, you will learn what a variable in C means. You will how to declare
+variables. You will learn about the different types of variables and the kind of
+values they can store. You will learn how to print the values stored in
+different types of variables using `printf`. You will learn how to declare
+different types of variables. You will learn how to assign values to variables.
+You will learn about the `ASCII` character set. You will learn about the different
+scopes of variables in C.
 
 ## What is a variable in C?
 In C, a variable is a symbolic name that represents a particular
