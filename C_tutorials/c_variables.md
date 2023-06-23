@@ -15,7 +15,7 @@ machine executing your program.
 > “In C, all variables must be declared before they are used, usually at the
 > beginning of the function before any executable statements.” – K & R
 
-You specify a type with an identifier to declare a variable in C programming.
+To declare a variable in C programming, specify a type with an identifier.
 
 ```C
 /* structure of variable declaration in C */
