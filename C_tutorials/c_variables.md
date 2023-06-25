@@ -36,8 +36,8 @@ identifier.
 The following list indicates the rules you must follow to construct a valid
 identifier in C:
 
-- it must start with an alphabet(the underscore `_` counts as an alphabet).
-- it must not have any spaces inbetween.
+- It must start with an alphabet(the underscore `_` counts as an alphabet).
+- It must not have any spaces inbetween.
 - It must be unique and must not be a keyword in C.
 - It can be made up of uppercase or lowercase alphabetic characters, the 10.
 digits and the underscore `_`.
@@ -170,6 +170,7 @@ int main(void)
 }
 
 ```
+[image of output]
 
 **The type specified for a variable determines the range of values that the
 variable can store.**
@@ -179,31 +180,57 @@ machines) seriously and actually bothers to tell you what values and ranges are
 guaranteed to be safe for each **type**. Continue reading to learn more about
 the different types and their range of values.
 
-## Integer Type
-An integer type variable will store whole numbers. `int` is the keyword used to
-specify the integer type.
+### Integer Type
+An integer type variable will store integer constants. In C, we use the keyword
+`int` to specify that a declaration is an integer type.
 
+An integer constant consist of a sequence of one or more digits. A minus sign
+before the sequence indicates that the value is negative. No embedded spaces are
+permitted between the digits, and values larger than 999 cannot be expressed
+using commas. C allows integer constants to be written in decimal(base 10),
+octal (base 8), or hexadecimal (base 16).
 
-An integer type variable can be declared as one of two forms:
-- **Signed** integer types
-- **Unsigned** integer types
-
-Variables declared with keyword `int` are **signed** integer types. This means
-they can store both negative and positive whole numbers.
-
-Variables declared with keyword `unsigned int` are **unsigned** integer types.
-this means they can only store positive whole numbers.
-
+Decimal integer constant contain digits between 0 and 9. They must not begin
+with a zero:
+```C
+/* examples of valid integer constant */
+-10
+255
+11000
+```
+Octal integer constants contain only digits between 0 and 7. They must begin
+with a zero:
+```C
+/* example of valid octal integer constants */
+017
+0377
+0777777
+```
+Hexidecimal integer constants contain digits between 0 and 9 and letter between
+a and f. They must begin with 0x:
+```C
+/* examples of valid hexadecimal integer constant */
+0xff
+0xfF
+0x1A
+0xAB
+```
+An integer type variable can be declared as one of two forms; **signed** or
+**unsigned**. By default, a variable declared with the keyword `int` is a **signed**
+integer type variable. This means it can store either negative or positive
+integer constants. To declare an **unsigned** integer type variable, we use the
+keyword `unsigned int`. An **unsigned** integer type variable can only store
+positive integer constants.
 
 To print the value stored in a variable with the `printf` function we use a
 format specifier.
 
-The format specifier for printing the value stored in a **signed** integer type
-variable is `%d` while `%u` is the format specifier for printing value stored in an
-**unsigned** integer type variable.
+`%d` is the format specifier used to print the value stored in a **signed**
+integer type variable while `%u` is the format specifier used to print the value
+stored in an **unsigned** integer type variable.
 
 ```C
-/* code example of printing signed integers */
+/* code example of printing base signed and unsigned integer type variables */
 #include <stdio.h>
 
 int main(void)
@@ -227,10 +254,11 @@ int main(void)
 }
 
 ```
+[image of output]
 
-For both `signed` and `unsigned` integer types, C provides 3 flavors to allow
-us construct an integer type variable that meets our needs. The reserved keyword to specify
-each subtypes are:
+For both `signed` and `unsigned` integer types, C provides 3 subtype
+flavors to allow us construct an integer type variable that meets our needs.
+The reserved keyword to specify each subtype flavors are:
 
 - `unsigned short int`
 - `unsigned int`
@@ -239,19 +267,27 @@ each subtypes are:
 - `signed int`
 - `signed long int`
 
+ C allows us to abbreviate the subtype keywords in our codes by dropping the word
+ `int` and `signed`. For example, `unsigned short int` can be abbreviated to `unsigned
+ short` and `signed long int` can be abbreviated to just `long`. Omitting `int` and
+ `signed` this way is a widespread practice among C programmers.
 
 `%lu` is the format specifier used to print the values of `unsigned long int`
 variables while `%ld` is used to print the values of `signed long int`
-variables. For the `unsigned short int` and `signed short int` variables use the
-format specifier `%u` and `%d` respectively.
+variables. To print the values stored in `unsigned short int` and
+`signed short int` variables use the format specifier `%u` and `%d` respectively.
 
-The integer type flavor you specify in a variable's declaration determines the
+> The return value of most C standard library functions are unsigned long integers.
+> Check the earlier code snippet example that used the `sizeof` function to see how to
+> print an unsigned integer.
+
+The integer type subtype you specify in a variable's declaration determines the
 range of values that can be stored through the variable. This range of values
-represented by each of the integer type flavors varies from
-one machine to another.
+represented by each of the subtypes varies from one machine to another.
 
-The following table shows the range of values for each flavor of an integer
-type variable on most 64-bits Linux machines:
+The following table shows the memory that will be allocated and the range of
+values that can be assigned to a variable declared with any of the integer type
+subtypes on most 64-bit Linux machines:
 
 |Type | Memory allocation | Value range
 --- | --- | ---
@@ -262,12 +298,12 @@ type variable on most 64-bits Linux machines:
 `long` | 8 bytes | -9,223,372,036,854,775,808 to 9,223,372,036,854,775,807
 `unsigned long` | 8 bytes | 0 to 18,446,744,073,709,551,615
 
-C allows us to abbreviate the keywords of integer types flavors by dropping the
-word `int`. For example, `unsigned short int` may be abbreviated to `unsigned
-short`, and `long int` may be abbreviated to just `long`. Omitting `int` this
-way is a widespread practice among C programmers.
+C allows us to abbreviate the keywords of integer types subtypes in our codes by
+dropping the word `int` and `signed`. For example, `unsigned short int` may be
+abbreviated to `unsigned short`, and `signed long int` can be abbreviated to just
+`long`. Omitting `int` this way is a widespread practice among C programmers.
 
-### Signed vs Unsigned (optional read)
+#### Signed vs Unsigned (optional read)
 
 In C programming, unsigned integers are  preferred over signed integers because
 [unsigned integers are more efficient](https://embeddedgurus.com/stack-overflow/2009/05/signed-versus-unsigned-integers/).
@@ -275,10 +311,11 @@ Also unsigned integers produce defined results for
 [modulo arithmetic overflow](https://embeddedgurus.com/stack-overflow/2009/08/a-tutorial-on-signed-and-unsigned-integers/#:~:text=To%20convert%20a%20signed%20integer%20to%20an%20unsigned,c%3B%20b%20%3D%20%28unsigned%20int%29a%3B%20c%20%3D%20%28int%29b%3B)
 
 
-## Character types
+### Character types
 
 A character type variable will store character constants and manipulate string
-literals. `char` is the keyword used to specify the character type.
+literals. In C, we use the keyword `char` to specify that a declaration is a
+character type.
 
 In this section, I will focus only on how `char` type variables store character
 constants because the discussion of how `char` type variables manipulate string
@@ -302,6 +339,10 @@ The following are represented with whole numbers in **ASCII**:
 
 **ASCII** is capable of representing 128 different characters.
 
+The character constants a `char` type variable can store varies from one
+computer to another, because different machines may have different underlying
+character sets. The **ASCII** character set is available on most Linux machines.
+
 ```C
 char aCharConst;
 
@@ -314,10 +355,6 @@ aCharConst = ' '; /* space */
 aCharConst = 'B'; /* upper-case B 8/
 ```
 
-The character constants a `char` type variable can store varies from one
-computer to another, because different machines may have different underlying
-character sets. The **ASCII** character set is available on most Linux machines.
-
 **It is important to note that character constants are enclosed in single quotes,
 not double quotes: `'b'` is not the same as `"b"`.**
 
@@ -327,10 +364,13 @@ not double quotes: `'b'` is not the same as `"b"`.**
 
 int main(void)
 {
-	char ch;
+	/* variable declaration */
+	char ch; /* char type variable */
 
+	/* variable assignment */
 	ch = 'W';
 
+	/* print the value stored in the variables */
 	printf("The character constant stored in variable ch is %c\n", ch);
 
 	return (0);
@@ -350,12 +390,15 @@ character constant in the underlying character set on the machine executing the 
 
 int main(void)
 {
-	char ch;
-	int i;
+	/* variable declarations */
+	char ch; /* char type variable */
+	int i; /* int type variable */
 
+	/* variable assignments */
 	i = 65;
-	ch = i + 'a';
+	ch = i + 'a'; /* C will translate the character constant to its integer value in ASCII */
 
+	/* print values stored in the different types of variables */
 	printf("The value stored in variable "i" is: %d\n", i);
 	printf("The character constant stored in variable "ch" is: %c\n", ch);
 
@@ -391,7 +434,60 @@ whether `char` is signed or unsigned.
 > Don't assume that `char` is either signed or unsigned by default. if it
 > matters, use `signed char` or `unsigned char` instead of `char`.
 
-## Floating types
+### Floating types
+A floating type variable will store floating-point constants. In C, we use the
+keyword `float` to specify that a declaration is a floating type.
+
+floating-point constants are values that contain digits after the decimal
+point. You omit digits before the decimal point or digits after the decimal
+point, but you can't omit both. Floating-point constants can also be expressed
+in *scientific notation*.
+```C
+/* example of valid floating-point constants */
+3.
+120.8
+-.0001
+1.7e4 /* scientific notation for 1.7 * 10^-4 */
+2.5E+1 /* scientific notation for 2.5 * 10^1 */
+```
+C provides three (3) floating types keywords, corresponding to to different
+floating-point formats:
+- `float` Single-precision floating-point
+- `double` Double-precision floating-point
+- `long double` Extended-precision floating point
+
+The C standard doesn't state how much precision the `float`, `double`, and
+`long double` types provide, since different computer may store floating-point
+numbers in different ways. Most modern computers follow the specifications in
+IEEE standard 754 (also known as IEC 60559).
+
+By default, all floating-point constants are stored as double-precision values
+by the C compiler. This means for example when a C compiler finds a constant
+120.8 in your program, it arranges for the number to be stored in memory in the
+same format as a `double` variable.
+
+`%f`, `%e` or`%g` is the format specifier used to print floating-point constants with
+`printf`. The format specifier `%g` produces the most aesthetically pleasing
+output because it lets `printf`decide whether to display the floating-point
+constant in normal floating-point notation or in scientific notation.
+```C
+#include <stdio.h>
+
+int main(void)
+{
+	float profit;
+	double temp;
+
+	profit = 12.50;
+	temp = -4.6;
+
+
+	printf();
+	printf();
+
+	return (0)
+}
+```
 
 
 ## Scope of variables
