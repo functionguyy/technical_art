@@ -68,10 +68,10 @@ Programming best practices recommends that you construct identifiers that
 reflects their intended use.
 
 ## What is a type?
-A type is the classification that specify the kind of values an identifier can
+A type is the specification that describes the kind of values an identifier can
 store or manipulate.
 
-C is a statically typed language. This means all identifiers must be associated
+C is a static typed language. This means that all identifiers must be associated
 with a type.
 
 The type specified for an identifier indicates the following to the compiler:
@@ -192,7 +192,7 @@ permitted between the digits, and values larger than 999 cannot be expressed
 using commas. C allows integer constants to be written in decimal(base 10),
 octal (base 8), or hexadecimal (base 16).
 
-Decimal integer constant contain digits between 0 and 9. They must not begin
+**Decimal** integer constant contain digits between 0 and 9. They must not begin
 with a zero:
 ```C
 /* examples of valid integer constant */
@@ -200,7 +200,7 @@ with a zero:
 255
 11000
 ```
-Octal integer constants contain only digits between 0 and 7. They must begin
+**Octal** integer constants contain only digits between 0 and 7. They must begin
 with a zero:
 ```C
 /* example of valid octal integer constants */
@@ -208,7 +208,7 @@ with a zero:
 0377
 0777777
 ```
-Hexidecimal integer constants contain digits between 0 and 9 and letter between
+**Hexidecimal** integer constants contain digits between 0 and 9 and letter between
 a and f. They must begin with 0x:
 ```C
 /* examples of valid hexadecimal integer constant */
@@ -354,7 +354,7 @@ aCharConst = 'b'; /* lower-case b */
 aCharConst = '\n'; /* new line special character */
 aCharConst = '0'; /* digit 0 */
 aCharConst = ' '; /* space */
-aCharConst = 'B'; /* upper-case B 8/
+aCharConst = 'B'; /* upper-case B */
 ```
 
 **It is important to note that character constants are enclosed in single quotes,
