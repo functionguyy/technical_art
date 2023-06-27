@@ -1,5 +1,5 @@
 # A COMPLETE INTRODUCTION TO VARIABLES IN C
-In a C program, whatever its size, consists of functions and variables. A function
+A C program, whatever its size, consists of functions and variables. A function
 contains statements that specify the computing operations to be done, and
 variables store values used during the computation.
 
@@ -71,7 +71,7 @@ reflects their intended use.
 A type is the specification that describes the kind of values an identifier can
 store or manipulate.
 
-C is a static typed language. This means that all identifiers must be associated
+C is a statically typed language. This means all identifiers must be associated
 with a type.
 
 The type specified for an identifier indicates the following to the compiler:
