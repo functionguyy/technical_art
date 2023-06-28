@@ -287,11 +287,12 @@ The following table shows each Integer type subtype and its `printf` format
 specifier:
 Type | `printf` format specifier (Decimal, Octal, Hexidecimal)
 --- | ---
-`short` | `%d`
-`unsigned short` | `%u`
-`int` | `%d`
-`unsigned int` | `%u`
-`long` | `%`|
+`short` | `%hd`,`%ho`, `%hx`
+`unsigned short` | `%hu`, `%ho`, `%hx`
+`int` | `%d`, `%o`, `%x`
+`unsigned int` | `%u`, `%o`, `%x`
+`long` | `%ld`, `%lo`, `%lx`
+`unsigned long` | `%lu`, `%lo`, `%lx`
 
 In the table the format specifiers are comma separated for the 3 notations
 (Decimal, Octal)
