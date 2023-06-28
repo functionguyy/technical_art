@@ -285,14 +285,16 @@ We use a format specifier to print the value stored in a variable with the
 
 The following table shows each Integer type subtype and its `printf` format
 specifier:
-Type | decimal notation `printf` format
-		specifier
---- | --- | --- | 
+Type | `printf` format specifier (Decimal, Octal, Hexidecimal)
+--- | ---
 `short` | `%d`
 `unsigned short` | `%u`
 `int` | `%d`
 `unsigned int` | `%u`
-`long` | `%`
+`long` | `%`|
+
+In the table the format specifiers are comma separated for the 3 notations
+(Decimal, Octal)
 Use format specifier `%d` with `printf` to print the value in a **signed** Integer type variable.
 And use format specifier `%u` with `pri`is the format specifier used to print the value
 stored in an **unsigned** integer type variable.
