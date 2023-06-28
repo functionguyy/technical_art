@@ -1,15 +1,15 @@
 # A COMPLETE INTRODUCTION TO VARIABLES IN C
-A C program, whatever its size, consists of functions and variables. A function
-contains statements that specify the computing operations to be done, and
-variables store values used during the computation.
+All C programs, whatever their size, consists of functions and variables. A
+function contains statements that specify the computing operations to be done,
+and variables store values used during the computation.
 
 In this article, you will learn the meaning of a variable in C, how to declare
-a variable and how to assign values to variables. You will learn about the different types of variables and the kind of
-values they can store and, how to print the values stored in different types of
-variables using `printf`. You will also learn about the `ASCII` character set and the different
+a variable and how to assign values to variables. You will learn about the
+different types of variables and the kind of values they can store and, how to
+print the values stored in different types of variables using `printf`. You
+will also learn about the `ASCII` character set and the different
 scopes of variables in C. After reading this article you will have a good
 understanding of variables in C and all it nuances.
-
 
 
 ## What is a variable in C?
@@ -20,18 +20,18 @@ machine executing your program.
 > “In C, all variables must be declared before they are used, usually at the
 > beginning of the function before any executable statements.” – K & R
 
-To declare a variable in C programming, we first specify the type of the
+To declare a variable in C programming, we first specify the Type of the
 variable, then its identifier.
 
 ```C
 /* structure of variable declaration in C */
 
-type identifier; /* single variable declaration */
+Type identifier; /* declaration of a single variable */
 
-type identifier_1, identifier_2, identifier_3; /* multiple variable declaration with the same type */
+Type identifier_1, identifier_2, identifier_N; /* declaration of multiple variables with the Type */
 ```
-## What is an identifier?
-An identifier is any name you provide for variables, functions, macros, and
+## What is an Identifier?
+An Identifier is any name you provide for variables, functions, macros, and
 other data structures in your program. You're required to construct a valid
 identifier.
 
@@ -64,52 +64,61 @@ int /* int is a  keyword in C */
 **Uppercase and lowercase letters are distinct in C. Therefore, the identifiers
 `sum`, `Sum`, and `SUM` are different.**
 
-Programming best practices recommends that you construct identifiers that
+Programming best practices recommends that you construct Identifiers that
 reflects their intended use.
 
-## What is a type?
-A type is the specification that describes the kind of values an identifier can
-store or manipulate.
+## What is a Type?
+A Type is the specification that describes the kind of
+values an identifier can store or manipulate.
 
 C is a statically typed language. This means all identifiers must be associated
-with a type.
+with a Type.
 
-The type specified for an identifier indicates the following to the compiler:
+The Type specified for an identifier indicates the following to the compiler:
 
 - The kind of values that are acceptable to be stored through the identifier
 - The acceptable range of values that can be stored through the identifier
-- The amount of storage space that should be reserved for the identifier
+- The amount of storage space that should be allocated for the identifier
 - The computations that should be allowed to be performed with the identifier
 
 If any of the above conditions cannot be satisfied for the specified type of an
 identifier, the compiler generates an error message.
 
-## Fundamental types in C
-C supports three (3) fundamental types:
+### Fundamental Types in C
+C supports three (3) fundamental Types:
 
 - Integer types
 - Floating types
 - Character types
 
-To specify any of the fundamental types in a variable declaration, we use the dedicated
-keywords provided for each of them in the C standard:
+To specify any of the fundamental Types in a variable declaration, we use
+the dedicated keywords provided for each of them in the C standard:
 
-- `int` is the keyword used to specify an integer type variable
-- `float` is the keyword used to speicify a floating type variable
-- `char` is the keyword used to specify a character type variable
+- `int` is the keyword used to specify an Integer type
+- `float` is the keyword used to speicify a Floating type
+- `char` is the keyword used to specify a Character type
+
+You might have heard or seen people use the term Datatype and you're wondering
+what the difference is between Datatype and Type. Although both terms can be
+used interchangeably, they have slightly different meanings; Type refers to a
+specification while Datatype refers to data that fits a Type specification.
+
+So when we specify a *Type* in a Variable declaration, we're instructing the
+compiler to make a Variable that can store *Datatypes* that fits the
+specifications of the *Type* specified for the Variable.
 
 ## How to declare a variable in C?
-To declare a variable in C programming, we first specify the type of the
-variable, then its identifier. For example we might declare variables
+To declare a variable in C programming, we first specify the Type of the
+variable, then its Identifier. For example we might declare variables
 "height" and "profit" as:
 
 ```C
 int height;
 float profit;
 ```
-The first declaration states that `height` is a variable of type `int`, which
+The first declaration states that `height` is a variable of Type `int`, which
 means that `height` can store whole numbers. The second declaration states that
-`profit` is a variable of type `float`, which means that `profit` can store
+`profit` is a variable of Type `float`, which means that `profit` can store
 numbers with digits after the decimal points.
 
 After a variable has been declared it can be initialized (given a value) by
@@ -121,7 +130,7 @@ profit = 21.50;
 ## What happens in your computer when you declare a variable in C?
 When you declare a variable in the C programming language, you essentially
 introduce the variable to the program. This declaration informs the compiler
-that it should allocate storage space for the variable on the computer's hard
+to allocate storage space for the variable on the computer's hard
 drive while running the program.
 
 While compiling your program, the compiler generates machine code that directs
@@ -131,27 +140,28 @@ identifiers to the allocated memory locations. This allocated memory serves as
 storage for the values assigned to the variables.
 
 The CPU architecture of your computer determines the precise amount of memory
-allocated for each variable type. Various CPU architectures have distinct
+allocated for each variable type. Different CPU architectures have distinct
 memory allocation specifications for the fundamental C types.
 
-Memory allocation is generally defined in **bytes** but computer's translate
-memory allocation in **bits**
+Memory allocation is generally defined in **Bytes** but computer's translate
+memory allocation in **Bits**
+```bash
+1 Byte = 8 Bits
 ```
-1 byte = 8 bits
-```
-
-On most 64-bit Linux machines, the memory allocation specifications for the
-fundamental C types are as follows:
+The following table shows the memory space that will be allocated for Variables
+declared with the fundamental C Types on most 64-bit Linux machines:
 
 Type | memory allocation
 --- | ---
-`char` | 1 byte
-`int` | 4 bytes
-`float` | 4 bytes
+`char` | 1 Byte
+`int` | 4 Bytes
+`float` | 4 Bytes
 
 
 To obtain the memory allocation specifications for each of the fundamental C
-types on your computer, you can use the standard library function `sizeof`.
+Types on your computer, you can pass the Type keyword as an argument to the
+standard library function `sizeof`and print its return value with the `printf`
+function.
 
 Compile the program below on your Bash/terminal and run its output file to
 print out the memory allocation specification for each of the fundamental C types on
@@ -174,23 +184,30 @@ int main(void)
 ```
 [image of output]
 
-**The type specified for a variable determines the range of values that the
+We use a format specifier to print the value stored in a Variable with the
+`printf` function. In the above code snippet, the format specifier `%lu` is
+used in the `printf` function to print the value returned by the sizeof function
+because its return value is an unsigned Integer type (more details about this
+Integer type will be discussed soon).
+
+**The Type specified for a variable determines the range of values that the
 variable can store.**
 
-C takes portability(ability of your program to compile on different kinds of
+C takes portability(the ability of your program to compile on different kinds of
 machines) seriously and actually bothers to tell you what values and ranges are
-guaranteed to be safe for each **type**. Continue reading to learn more about
-the different types and their range of values.
+guaranteed to be safe for each **Type**. In the following sections, you will
+learn more about each type and its guaranteed range of values:
+
 
 ### Integer Type
-An integer type variable will store integer constants. In C, we use the keyword
-`int` to specify that a declaration is an integer type.
+An Integer type variable will store integer constants. `int` is the keyword
+that is used to specify the Integer type.
 
 An integer constant consist of a sequence of one or more digits. A minus sign
 before the sequence indicates that the value is negative. No embedded spaces are
 permitted between the digits, and values larger than 999 cannot be expressed
-using commas. C allows integer constants to be written in decimal(base 10),
-octal (base 8), or hexadecimal (base 16).
+using commas. C allows integer constants to be written in decimal notation (base
+10), octal notation (base 8), or hexadecimal notation (base 16).
 
 **Decimal** integer constant contain digits between 0 and 9. They must not begin
 with a zero:
@@ -217,18 +234,67 @@ a and f. They must begin with 0x:
 0x1A
 0xAB
 ```
-An integer type variable can be declared as one of two forms; **signed** or
-**unsigned**. By default, a variable declared with the keyword `int` is a **signed**
-integer type variable. This means it can store either negative or positive
-integer constants. To declare an **unsigned** integer type variable, we use the
-keyword `unsigned int`. An **unsigned** integer type variable can only store
-positive integer constants.
+> Remember that integers constants are always stored in binary regardless of
+> what notation we have used to express them in our codes. These notation are
+> nothing more than an alternative way to write numbers.
 
-To print the value stored in a variable with the `printf` function we use a
-format specifier.
+An Integer type Variable can be declared as one of two forms; **signed** or
+**unsigned**. By default, a Variable declared with the keyword `int` is a **signed**
+Integer type Variable. This means it can store either negative or positive
+Integer constants. To declare an **unsigned** Integer type Variable, we use the
+keyword `unsigned int`. An **unsigned** Integer type Variable can only store
+positive Integer constants.
 
-`%d` is the format specifier used to print the value stored in a **signed**
-integer type variable while `%u` is the format specifier used to print the value
+For both `signed` and `unsigned` integer types, C provides 3 subtype
+flavours to allow us construct an Integer type variable that meets our needs.
+The following keywords are used to specify each subtype flavors:
+
+- `short int`
+- `unsigned short int`
+- `int`
+- `unsigned int`
+- `long int`
+- `unsigned long int`
+
+C allows us to abbreviate the subtype keywords in our codes by dropping the word
+`int`. For example, `short int` can be abbreviated to `short` and
+`unsigned long int` can be abbreviated to just `long`. Omitting `int` this
+way is a widespread practice among C programmers.
+
+The subtype flavour that you specify in a variable's declaration
+determines the range of values that can be stored through the variable and its
+memory allocation for the variable.
+
+The range of values represented by each of the subtypes varies from one machine
+to another. The following table shows the memory allocation for each subtype and
+the range of values that they represent on most 64-bit Linux machines:
+
+|Type | Memory allocation | Value range
+--- | --- | ---
+`short` | 2 bytes | -32,768 to 32,767
+`unsigned short` | 2 bytes | 0 to 65,535
+`int` | 4 bytes | -2,147,483,648 to 2,147,483,647
+`unsigned int` | 4 bytes | 0 to 4,294,967,295
+`long` | 8 bytes | -9,223,372,036,854,775,808 to 9,223,372,036,854,775,807
+`unsigned long` | 8 bytes | 0 to 18,446,744,073,709,551,615
+
+#### How to print the value in an Integer type Variable
+
+We use a format specifier to print the value stored in a variable with the
+`printf`function.
+
+The following table shows each Integer type subtype and its `printf` format
+specifier:
+Type | decimal notation `printf` format
+		specifier
+--- | --- | --- | 
+`short` | `%d`
+`unsigned short` | `%u`
+`int` | `%d`
+`unsigned int` | `%u`
+`long` | `%`
+Use format specifier `%d` with `printf` to print the value in a **signed** Integer type variable.
+And use format specifier `%u` with `pri`is the format specifier used to print the value
 stored in an **unsigned** integer type variable.
 
 ```C
@@ -258,21 +324,6 @@ int main(void)
 ```
 [image of output]
 
-For both `signed` and `unsigned` integer types, C provides 3 subtype
-flavors to allow us construct an integer type variable that meets our needs.
-The reserved keyword to specify each subtype flavors are:
-
-- `unsigned short int`
-- `unsigned int`
-- `unsigned long int`
-- `signed short int`
-- `signed int`
-- `signed long int`
-
- C allows us to abbreviate the subtype keywords in our codes by dropping the word
- `int` and `signed`. For example, `unsigned short int` can be abbreviated to `unsigned
- short` and `signed long int` can be abbreviated to just `long`. Omitting `int` and
- `signed` this way is a widespread practice among C programmers.
 
 `%lu` is the format specifier used to print the values of `unsigned long int`
 variables while `%ld` is used to print the values of `signed long int`
@@ -283,27 +334,8 @@ variables. To print the values stored in `unsigned short int` and
 > Check the earlier code snippet example that used the `sizeof` function to see how to
 > print an unsigned integer.
 
-The integer type subtype you specify in a variable's declaration determines the
-range of values that can be stored through the variable. This range of values
-represented by each of the subtypes varies from one machine to another.
 
-The following table shows the memory that will be allocated and the range of
-values that can be assigned to a variable declared with any of the integer type
-subtypes on most 64-bit Linux machines:
 
-|Type | Memory allocation | Value range
---- | --- | ---
-`short` | 2 bytes | -32,768 to 32,767
-`unsigned short` | 2 bytes | 0 to 65,535
-`int` | 4 bytes | -2,147,483,648 to 2,147,483,647
-`unsigned int` | 4 bytes | 0 to 4,294,967,295
-`long` | 8 bytes | -9,223,372,036,854,775,808 to 9,223,372,036,854,775,807
-`unsigned long` | 8 bytes | 0 to 18,446,744,073,709,551,615
-
-C allows us to abbreviate the keywords of integer types subtypes in our codes by
-dropping the word `int` and `signed`. For example, `unsigned short int` may be
-abbreviated to `unsigned short`, and `signed long int` can be abbreviated to just
-`long`. Omitting `int` this way is a widespread practice among C programmers.
 
 #### Signed vs Unsigned (optional read)
 
