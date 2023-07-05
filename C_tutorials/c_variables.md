@@ -265,8 +265,8 @@ The subtype flavour that you specify in a variable's declaration
 determines the range of values that can be stored through the variable and its
 memory allocation for the variable.
 
-The range of values represented by each of the subtypes varies from one machine
-to another. The following table shows the memory allocation for each subtype and
+The range of values represented by each of the subtypes varies machine to
+machine. The following table shows the memory allocation for each subtype and
 the range of values that they represent on most 64-bit Linux machines:
 
 |Type | Memory allocation | Value range
@@ -280,9 +280,6 @@ the range of values that they represent on most 64-bit Linux machines:
 
 #### How to print the value in an Integer type Variable
 
-We use a format specifier to print the value stored in a variable with the
-`printf`function.
-
 The following table shows each Integer type subtype and its `printf` format
 specifier:
 Type | `printf` format specifier (Decimal, Octal, Hexidecimal)
@@ -294,11 +291,8 @@ Type | `printf` format specifier (Decimal, Octal, Hexidecimal)
 `long` | `%ld`, `%lo`, `%lx`
 `unsigned long` | `%lu`, `%lo`, `%lx`
 
-In the table the format specifiers are comma separated for the 3 notations
-(Decimal, Octal)
-Use format specifier `%d` with `printf` to print the value in a **signed** Integer type variable.
-And use format specifier `%u` with `pri`is the format specifier used to print the value
-stored in an **unsigned** integer type variable.
+In the table above the format specifiers are comma separated for the 3 notations
+(Decimal, Octal, Hexidecimal)
 
 ```C
 /* code example of printing base signed and unsigned integer type variables */
@@ -310,6 +304,10 @@ int main(void)
 	int score_point;
 	int height;
 	unsigned int age;
+	short num;
+	unsigned short num2;
+	long
+	unsigned long
 
 	/* variable assignment or initialization */
 	score_point = -10;
@@ -317,7 +315,7 @@ int main(void)
 	age = 40;
 
 	/* printing values assigned to the variable */
-	printf("This is the final score point: %d\n", score_point);
+	printf("The value stored in the short variable: %hd\n",);
 	printf("This is the height of the player: %d\n", height);
 	printf("The player is %u years old", age);
 
@@ -328,14 +326,7 @@ int main(void)
 [image of output]
 
 
-`%lu` is the format specifier used to print the values of `unsigned long int`
-variables while `%ld` is used to print the values of `signed long int`
-variables. To print the values stored in `unsigned short int` and
-`signed short int` variables use the format specifier `%u` and `%d` respectively.
-
 > The return value of most C standard library functions are unsigned long integers.
-> Check the earlier code snippet example that used the `sizeof` function to see how to
-> print an unsigned integer.
 
 
 
@@ -350,13 +341,9 @@ Also unsigned integers produce defined results for
 
 ### Character types
 
-A character type variable will store character constants and manipulate string
-literals. In C, we use the keyword `char` to specify that a declaration is a
-character type.
+A character type variable will store character constants. `char` is the keyword
+that is used to specify the Character type.
 
-In this section, I will focus only on how `char` type variables store character
-constants because the discussion of how `char` type variables manipulate string
-literals is beyond the scope of this article.
 
 Character constants are characters that are represented in a character set. In
 C, a character in a single quote `''` forms a character constant.
@@ -365,37 +352,43 @@ C, a character in a single quote `''` forms a character constant.
 'v'
 ```
 
-A character set is a system used to reperesent characters
-with codes that are understood by computers. A popular type of character set is
-the **American Standard Code for Information Interchange(ASCII)** character set.
+A character set is an encoding scheme used to represent text characters
+as numeric codes that are understood by computers. The **American Standard Code for
+Information Interchange(ASCII)** is a popular character set used as a standard
+for character encoding in computers and communication systems. It uses integer
+constants to encode text characters. **ASCII** is the underlying character set
+on most Linux/Unix-like machines.
 
 The following are represented with whole numbers in **ASCII**:
-- Uppercase and lowercase letters of the alphabet.
-- digits 0 to 9.
-- Special characters in C.
+- Character constants of uppercase and lowercase letters of the alphabet.
+- Character constants of digits 0 to 9.
+- Character constants of C special characters.
 
-**ASCII** is capable of representing 128 different characters.
-
-The character constants a `char` type variable can store varies from one
-computer to another, because different machines may have different underlying
-character sets. The **ASCII** character set is available on most Linux machines.
+**ASCII** is capable of representing 128 different characters:
 
 ```C
 char aCharConst;
 
-/* sample of character constants that can be stored in a char type variable */
+/* examples of characters represented in ASCII */
 
-aCharConst = 'b'; /* lower-case b */
-aCharConst = '\n'; /* new line special character */
-aCharConst = '0'; /* digit 0 */
-aCharConst = ' '; /* space */
-aCharConst = 'B'; /* upper-case B */
+'b'; /* lower-case b */
+'\n'; /* new line special character */
+'0'; /* digit 0 */
+' '; /* space */
+'B'; /* upper-case B */
 ```
 
 **It is important to note that character constants are enclosed in single quotes,
 not double quotes: `'b'` is not the same as `"b"`.**
 
-`%c` is the format specifier used to print character constants.
+C also considers its special characters as single characters, which is why `'\n'` (a
+C special character used to inform `printf` to print a new line) can be a
+character constant.
+
+
+#### How to print the value of a Character type variable
+`%c` is the `printf` format specifier used to print any character constant stored in a
+`char` type variable.
 ```C
 #include <stdio.h>
 
@@ -416,28 +409,28 @@ int main(void)
 ```
 [image of output]
 
-
+#### Similarities between character constants and `int` types
 C treats character constants as small integers, which means character constants
 can be used in arithmetic computation. When a character constant appears in an
 arithmetic computation, C simply uses the integer value that represents the
-character constant in the underlying character set on the machine executing the program.
+character constant in the underlying character set (which is most likely
+**ASCII**) on the machine executing the program. This opens up the possibility
+to covert an integer constant to a character constant and vice versa.
 
 ```C
 #include <stdio.h>
 
 int main(void)
 {
-	/* variable declarations */
-	char ch; /* char type variable */
-	int i; /* int type variable */
+	char ch;
+	int num;
 
-	/* variable assignments */
-	i = 65;
-	ch = i + 'a'; /* C will translate the character constant to its integer value in ASCII */
+	/** converts the integer to its character constant representation */
+	ch = 9 + '0';
 
-	/* print values stored in the different types of variables */
-	printf("The value stored in variable "i" is: %d\n", i);
-	printf("The character constant stored in variable "ch" is: %c\n", ch);
+	/* converts a character constant to its integer constant representation */
+	num = '3'- '0';;
+
 
 	return (0);
 }
@@ -450,30 +443,30 @@ is their respective storage allocation and range of values. `char` type
 variables use a lesser storage allocation and accepts a smaller range of values.
 
 Also since C allows character constants to be used as integers in
-computation, a `char` type variable can exits in both `signed` and `unsigned`
-flavors.
+computation, a `char` type variable can exits in both **signed** and **unsigned**
+forms.
 
 The following table shows the storage allocation specification and range of
-values for the different flavours of `char` type variables:
+values for the different forms of `char` type variables:
 
 Type | Memory allocation spec | Value range
 --- | --- | ---
 `signed char` | 1 byte | -128 to 127
 `unsigned char` | 1 byte | 0 to 255
 
-The C standard doesn't define whether just specifing `char`  in a variable
-declaration indicates a signed type or an unsigned type. some compilers treat
-ordinary `char` as a signed type, while others treat it as an unsigned type.
-(Some even allow the programmer to select, via a compiler option whether `char`
-should be signed or unsigned). Most of the time it doesn't really matter
-whether `char` is signed or unsigned.
+> The C standard doesn't define whether just specifing `char`  in a variable
+> declaration indicates a signed type or an unsigned type. some compilers treat
+> ordinary `char` as a signed type, while others treat it as an unsigned type.
+> (Some even allow the programmer to select, via a compiler option whether `char`
+> should be signed or unsigned). Most of the time it doesn't really matter
+> whether `char` is signed or unsigned.
 
-> Don't assume that `char` is either signed or unsigned by default. if it
-> matters, use `signed char` or `unsigned char` instead of `char`.
+Don't assume that `char` is either signed or unsigned by default. if it
+matters, use `signed char` or `unsigned char` instead of `char`.
 
 ### Floating types
-A floating type variable will store floating-point constants. In C, we use the
-keyword `float` to specify that a declaration is a floating type.
+A floating type variable will store floating-point constants. `float` is the
+keyword that is used to specify a floating type.
 
 floating-point constants are values that contain digits after the decimal
 point. You omit digits before the decimal point or digits after the decimal
@@ -530,3 +523,7 @@ int main(void)
 ## Scope of variables
 A declared variable may only be use in a function, within a single source file
 or, multiple source files of the entire program.
+According scope,  variables are categorized in to different scopes and
+according a variable can be called one of the following names:
+- External variable
+- local variable
